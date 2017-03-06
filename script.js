@@ -1,7 +1,6 @@
 /////////////////////////////////
 // 1_Variable: let and const
 
-
 // ES5
 function variable1_5(){
     var name5 = 'Jane Doe';
@@ -14,11 +13,16 @@ function variable1_5(){
 function variable1_6(){
     const name6 = 'Jane Doe'; //immutable
     let age6 = 23; //mutable(value can be changed)
-    //name6 = 'Jane Miller';
     //console.log(name6);
-    document.getElementsByName('variable1_6')[0].style.color ='red';
-    document.getElementsByName('variable1_6')[0].innerHTML = 
-    "Uncaught TypeError: Assignment to constant variable.";
+    try {
+        name6 = 'Jane Miller';
+    }
+    catch(err) {
+        document.getElementsByName('variable1_6')[0].style.color ='red';
+        document.getElementsByName('variable1_6')[0].innerHTML = err.message;
+    }
+
+
 
 }
 
@@ -33,23 +37,39 @@ function driversLicence5(passedTest) {
     return temp;
 }
 
+// driversLicence5(true);
+
+
 function variable1_2_5(){
     document.getElementsByName('variable1_2_5')[0].innerHTML = driversLicence5(true);
 }
 
 // ES6
 function driversLicence6(passedTest) {
-    let firstName;
-    const yearOfBirth = 1990;
+
     if (passedTest) {
+        //var defined only in this block
+        let firstName;
+        const yearOfBirth = 1990;
         firstName = 'John';
     }    
     var temp = firstName + ', born in ' + yearOfBirth + ', is now officially allowed to drive a car.';
     return temp;
 }
 
+// driversLicence6(true);
+
 function variable1_2_6(){
-    document.getElementsByName('variable1_2_6')[0].innerHTML = driversLicence6(true);
+
+    try {
+        driversLicence6(true);
+    }
+    catch(err) {
+        document.getElementsByName('variable1_2_6')[0].style.color ='red';
+        document.getElementsByName('variable1_2_6')[0].innerHTML = err.message;
+    }
+
+    
 }
 
 // var i = 23;
@@ -61,7 +81,7 @@ function variable1_2_6(){
 // console.log(i);
 
 /////////////////////////////////
-// 2_String: String
+// 2_String: String intepolation & template literals
 
 
 let firstName2 = 'John';
@@ -73,70 +93,33 @@ function calcAge(year) {
 }
 
 // ES5
-console.log('This is ' + firstName2 + ' ' + lastName2 + '. He was born in ' + yearOfBirth2 + '. Today, he is ' + calcAge(yearOfBirth2) + ' years old.');
+//console.log('This is ' + firstName2 + ' ' + lastName2 + '. He was born in ' + yearOfBirth2 + '. Today, he is ' + calcAge(yearOfBirth2) + ' years old.');
 
-function variable2_5(){
-    document.getElementsByName('variable2_5')[0].innerHTML = 'This is ' + firstName2 + ' ' + lastName2 + '. He was born in ' + yearOfBirth2 + '. Today, he is ' + calcAge(yearOfBirth2) + ' years old.';
+function string1_5(){
+    document.getElementsByName('string1_5')[0].innerHTML = 'This is ' + firstName2 + ' ' + lastName2 + '. He was born in ' + yearOfBirth2 + '. Today, he is ' + calcAge(yearOfBirth2) + ' years old.';
 }
 // ES6
-console.log(`This is ${firstName2} ${lastName2}. He was born in ${yearOfBirth2}. Today, he is ${calcAge(yearOfBirth2)} years old.`);
+//console.log(`This is ${firstName2} ${lastName2}. He was born in ${yearOfBirth2}. Today, he is ${calcAge(yearOfBirth2)} years old.`);
 
-function variable2_6(){
-    document.getElementsByName('variable2_6')[0].innerHTML = `This is ${firstName2} ${lastName2}. He was born in ${yearOfBirth2}. Today, he is ${calcAge(yearOfBirth2)} years old.`;
+function string1_6(){
+    document.getElementsByName('string1_6')[0].innerHTML = `This is ${firstName2} ${lastName2}. He was born in ${yearOfBirth2}. Today, he is ${calcAge(yearOfBirth2)} years old.`;
 }
 
-/////////////////////////////////
-/////////////////////////////////
-// Lecture: Blocks and IIFEs
-
-/*
-// ES6
-{
-    const a = 1;
-    let b = 2;
-    var c = 3;
-}
-
-//console.log(a + b);
-console.log(c);
-
-
-// ES5
-(function() {
-    var c = 3;
-})();
-
-//console.log(c);
 
 
 
 
-
-/////////////////////////////////
-// Lecture: Strings
-
-/*
-let firstName = 'John';
-let lastName = 'Smith';
-const yearOfBirth = 1990;
-
-function calcAge(year) {
-    return 2016 - year;
-}
-
-// ES5
-console.log('This is ' + firstName + ' ' + lastName + '. He was born in ' + yearOfBirth + '. Today, he is ' + calcAge(yearOfBirth) + ' years old.');
-
-// ES6
-console.log(`This is ${firstName} ${lastName}. He was born in ${yearOfBirth}. Today, he is ${calcAge(yearOfBirth)} years old.`);
+let firstName3 = 'John';
+let lastName3 = 'Smith';
 
 
-const n = `${firstName} ${lastName}`;
-console.log(n.startsWith('j'));
-console.log(n.endsWith('Sm'));
-console.log(n.includes('oh'));
-console.log(`${firstName} `.repeat(5));
-*/
+//ES6 new features of string manipulation
+const n = `${firstName3} ${lastName3}`;
+console.log(n.startsWith('j')); //false - case sensitive
+console.log(n.endsWith('th')); //true can be more that one character
+console.log(n.includes('oh')); //true
+console.log(`${firstName3} `.repeat(5)); //John John John John John 
+
 
 
 
@@ -145,72 +128,90 @@ console.log(`${firstName} `.repeat(5));
 // Lecture: Arrow functions
 
 //example1
-const years = [1990, 1965, 1982, 1937];
+const years = [1980, 1990, 2000, 2010];
 
 // ES5
 var ages5 = years.map(function(el) {
-    return 2016 - el;
+    return 2017 - el;
 });
-// for(var i=0;i<ages5.length;i++){
-//    console.log(ages5[i]); 
-// }
-console.log(ages5);
-//
-function variable3_1_5(){
-    document.getElementsByName('variable3_1_5')[0].innerHTML = '[' + ages5 + ']';
-}
-
 
 // ES6
-let ages6 = years.map(el => 2016 - el);
-console.log(ages6);
-//
-function variable3_1_6(){
-    document.getElementsByName('variable3_1_6')[0].innerHTML = '[' + ages6 + ']';
+let ages6 = years.map(el => 2017 - el);
+
+
+function arrow_1_5(){
+    document.getElementsByName('arrow_1_5')[0].innerHTML = '[' + ages5 + ']';
 }
 
-// ages6 = years.map((el, index) => `Age element ${index + 1}: ${2016 - el}.`);
-// console.log(ages6);
+function arrow_1_6(){
+    document.getElementsByName('arrow_1_6')[0].innerHTML = '[' + ages6 + ']';
+}
 
-// ages6 = years.map((el, index) => {
-//     const now = new Date().getFullYear();
-//     const age = now - el;
-//     return `Age element ${index + 1}: ${age}.`
-// });
-// console.log(ages6);
 
 //example2
-// ES5
+let age2_6;
+
+
+age2_6 = years.map((el, index) => {
+    const now = new Date().getFullYear();
+    const age = now - el;
+    return `Age index ${index + 1}: ${age}`;
+});
+
+
+
+function arrow_2_6(){
+     document.getElementsByName('arrow_2_6')[0].innerHTML = '[' + age2_6 + ']';
+}
+
+
+//example3
+// ES5 - eg1
 var box5 = {
     color: 'green',
     position: 1,
     clickMe: function() {
-        var self = this; 
-        document.querySelector('.green').addEventListener('click', function() {
-        var str = 'This is box number ' + self.position + ' and it is ' + self.color;
-        //alert(str);
-        return str;
+        // var self = this; 
+        document.getElementsByClassName('box green')[0].addEventListener('click', function() {
+        var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+        alert(str);
+        //return str;
         });
     }
 }
-function variable3_1_5(){
-    document.getElementsByName('variable3_1_5')[0].innerHTML = box5.clickMe();
-    console.log(box5.clickMe());
+
+box5.clickMe();
+
+// ES5 - eg2
+var box5_2 = {
+    color: 'green',
+    position: 1,
+    clickMe: function() {
+        // var self = this; 
+        document.getElementsByClassName('box green')[1].addEventListener('click', function() {
+        var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+        alert(str);
+        //return str;
+        }.bind(this));
+    }
 }
+
+box5_2.clickMe();
 
 // ES6
 const box6 = {
     color: 'green',
     position: 1,
     clickMe: function() {
-        document.querySelector('.green').addEventListener('click', () => {
+        document.getElementsByClassName('box green')[2].addEventListener('click', () => {
         var str = 'This is box number ' + this.position + ' and it is ' + this.color;
-        //alert(str);
-        return str;
+        
+        alert(str);
         });
     }
 }
-//box6.clickMe()
+
+box6.clickMe();
 
 
 

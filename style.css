@@ -9,8 +9,8 @@ html,body,div,span,a,ul,li {
 
             .leftbox {
                 float: left;
-                border: 1px solid;
-                border-color:red;
+/*                border: 1px solid;
+                border-color:red;*/
                 width: 40%;
                 position: relative;
                 margin: auto;
@@ -18,8 +18,8 @@ html,body,div,span,a,ul,li {
             }
            .rightbox {
                 float: right;
-                border: 1px solid;
-                border-color:green;
+/*                border: 1px solid;
+                border-color:green;*/
                 width: 40%;
                 position: relative;
                 margin: auto;
