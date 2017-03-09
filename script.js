@@ -326,28 +326,35 @@ function promise6(){
     foo3.then(foo4());
 }
 
-// var http = require('http');
+var http = require('http');
 
-// function getURL(URL) {
-//     return new Promise(function(resolve, reject){
-//     http.get(URL, function(res) {
-//         resolve(res);
-//     }).on('error', function(e) {
-//         reject(e);
-//     });
-//     });
-// }
-// var google = getURL('http://google.com');
-// var github = getURL('http://github.com');
+function getURL(URL) {
+    return new Promise(function(resolve, reject){
+    http.get(URL, function(res) {
+        resolve(res);
+    }).on('error', function(e) {
+        reject(e);
+    });
+    });
+}
+var google = getURL('http://google.com');
+var github = getURL('http://github.com');
 
-// Promise.all([google, github]).then(function(results){
-//     results.forEach(function(result){
-//     console.log(result.statusCode);
-//     });
-// }).catch(function(err){
-//     console.log(err);
-// });
+Promise.all([google, github]).then(function(results){
+    results.forEach(function(result){
+    console.log(result.statusCode);
+    });
+}).catch(function(err){
+    console.log(err);
+});
 // /* Output
 // 200
 // 200
 // */
+
+// var p1 = Promise.resolve(1);
+// var p2 = Promise.reject(2);
+// var p3 = Promise.resolve(3);
+// Promise.all([p1,p2,p3]).then(function(results){
+//     console.log(results);
+// });
